@@ -1,0 +1,529 @@
+# Hand-checked parser cases. Run: i1sort eval-parser -v
+#
+# words:    the counted (non-filtered) words in order, written as any JMdict spelling
+#           of the expected entry (可愛い matches a かわいい token); add 【reading】
+#           to pin the reading, or use the JMdict sequence number.
+# filtered: surface → expected filter reason ("counted" = must not be filtered).
+# same:     texts that must each give exactly one counted word, all with the same key.
+# cleaned:  expected text after subtitle cleanup.
+
+# ---------------------------------------------------------------- conjugation
+- text: 食べさせられなかった
+  words: [食べる]
+  filtered: {させ: aux, られ: aux, なかっ: aux, た: aux}
+  tags: [conjugation]
+- text: 宿題を忘れちゃった
+  words: [宿題, 忘れる]
+  filtered: {ちゃっ: aux}
+  tags: [conjugation]
+- text: もう行かなきゃ
+  words: [もう, 行く]
+  filtered: {なきゃ: aux}
+  tags: [conjugation]
+- text: 本を読んでる
+  words: [本, 読む]
+  filtered: {でる: aux}
+  tags: [conjugation]
+- text: ご飯を食べてる
+  words: [ご飯, 食べる]
+  filtered: {てる: aux}
+  tags: [conjugation]
+- text: 見ておいてください
+  words: [見る]
+  filtered: {おい: grammar, ください: grammar}
+  tags: [conjugation]
+- text: 言わせてもらえませんか
+  words: [言う]
+  filtered: {もらえ: grammar}
+  tags: [conjugation]
+- text: 書かれていた手紙
+  words: [書く, 手紙]
+  filtered: {い: grammar}
+  tags: [conjugation]
+- text: 忘れられない思い出
+  words: [忘れる, 思い出]
+  tags: [conjugation]
+- text: 走りたくなかった
+  words: [走る]
+  tags: [conjugation]
+- text: 早く来いよ
+  words: [早い, 来る]
+  tags: [conjugation]
+- text: 静かにしろ
+  words: [静か]   # に+しろ may merge as the grammar expression にしろ; either way only 静か counts
+  tags: [conjugation]
+- text: 勉強しなければならない
+  words: [勉強]
+  filtered: {し: grammar, なければならない: grammar}
+  tags: [conjugation, grammar]
+- text: 映画を見に行った
+  words: [映画, 見る, 行く]
+  tags: [conjugation, expressions]
+- text: 帰ってきた
+  words: [帰る]
+  filtered: {き: grammar}
+  tags: [conjugation]
+- text: 死なせない
+  words: [死ぬ]
+  tags: [conjugation]
+- text: 待たせてしまってすみませんでした
+  words: [待つ]
+  filtered: {しまっ: grammar, すみませんでした: interjection}
+  tags: [conjugation, set-phrase]
+- text: 行っちまった
+  words: [行く]
+  tags: [conjugation, casual]
+- text: 助けてやるからな
+  words: [助ける]
+  filtered: {やる: grammar}
+  tags: [conjugation]
+
+# ---------------------------------------------------------------- spelling variants
+- same: [可愛い, かわいい, カワイイ]
+  tags: [variants]
+- same: [分かる, わかる, 解る]
+  tags: [variants]
+- same: [出来る, できる]
+  tags: [variants]
+- same: [綺麗, きれい, キレイ]
+  tags: [variants]
+- same: [美味しい, おいしい]
+  tags: [variants]
+- same: [凄い, すごい, スゴイ, すごーい, すごぉい]
+  tags: [variants, elongation]
+- same: [駄目, だめ, ダメ]
+  tags: [variants]
+- same: [沢山, たくさん]
+  tags: [variants]
+- same: [うるさい, ウルサイ]
+  tags: [variants]
+- same: [馬鹿, ばか, バカ, バーカ]
+  tags: [variants, elongation]
+- same: [面白い, おもしろい]
+  tags: [variants]
+- same: [一緒, いっしょ]
+  tags: [variants]
+
+# ---------------------------------------------------------------- names & honorifics
+- text: 田中くんが来た
+  words: [来る]
+  filtered: {田中: name, くん: honorific}
+  tags: [names]
+- text: 佐藤さんと東京へ行った
+  words: [東京, 行く]
+  filtered: {佐藤: name, さん: honorific}
+  tags: [names]
+- text: カズマ、早く逃げろ！
+  words: [早い, 逃げる]
+  filtered: {カズマ: name}
+  tags: [names]
+- text: 夜神月くん、ちょっといいかな
+  words: [ちょっと, いい]
+  filtered: {くん: honorific}
+  tags: [names]
+- text: 鈴木先生に聞いてみよう
+  words: [聞く]
+  filtered: {鈴木: name, 先生: honorific, みよう: grammar}
+  tags: [names]
+- text: 先生に聞いてみよう
+  words: [先生, 聞く]
+  filtered: {先生: counted}
+  tags: [names]
+- text: アメリカから来ました
+  words: [来る, アメリカ]
+  
+  tags: [names]
+- text: 禰豆子(ねずこ)　死ぬなよ
+  words: [死ぬ]
+  cleaned: 禰豆子 死ぬなよ
+  tags: [names, cleanup]
+- text: エリナさんたちが待っている
+  words: [待つ]
+  filtered: {エリナ: name, さん: honorific, たち: honorific, いる: grammar}
+  tags: [names]
+- text: 炭治郎、禰豆子を頼む
+  words: [頼む]
+  filtered: {炭治郎: name, 禰豆子: name}
+  tags: [names]
+
+- text: おばさん、田中さん、お兄ちゃんと母さんが来た
+  words: [おばさん, お兄ちゃん, 母さん, 来る]
+  filtered: {田中: name, さん: honorific}
+  tags: [names, compounds]
+
+# ---------------------------------------------------------------- interjections & fillers
+- text: えっ、本当？
+  words: [本当]
+  filtered: {えっ: interjection}
+  tags: [interjections]
+- text: あの、すみません
+  words: []
+  filtered: {あの: interjection, すみません: interjection}
+  tags: [interjections]
+- text: あの人は誰？
+  words: [あの, 人, 誰]
+  filtered: {あの: counted}
+  tags: [interjections]
+- text: まあ、いいけど
+  words: [いい]
+  filtered: {まあ: interjection}
+  tags: [interjections]
+- text: うわっ、すごーい！
+  words: [凄い]
+  filtered: {うわっ: interjection}
+  tags: [interjections, elongation]
+- text: はい、分かりました
+  words: [分かる]
+  filtered: {はい: interjection}
+  tags: [interjections]
+- text: うん、ねえ、聞いて
+  words: [聞く]
+  filtered: {うん: interjection, ねえ: interjection}
+  tags: [interjections]
+- text: えーと、何だっけ
+  words: [何]
+  filtered: {えー: interjection}
+  tags: [interjections]
+- text: ああ、ありがとう
+  words: []
+  filtered: {ああ: interjection, ありがとう: interjection}
+  tags: [interjections]
+- text: おい、待て！
+  words: [待つ]
+  filtered: {おい: interjection}
+  tags: [interjections]
+
+# ---------------------------------------------------------------- set expressions
+- text: 何か変な気がする
+  words: [何, 変, 気がする]
+  tags: [expressions]
+- text: そんな気がした
+  words: [そんな, 気がする]
+  tags: [expressions]
+- text: しょうがないじゃん
+  words: [しょうがない]
+  filtered: {じゃん: particle}
+  tags: [expressions, casual]
+- text: 明日は雨かもしれない
+  words: [明日, 雨]
+  filtered: {かもしれない: grammar}  # grammar pattern ("might"), not vocabulary
+  tags: [expressions]
+- text: 来ないかもしれません
+  words: [来る]
+  tags: [expressions]
+- text: 仕方ないっす
+  words: [仕方ない]
+  filtered: {っす: aux}
+  tags: [expressions, casual]
+- text: 気をつけてね
+  words: [気を付ける]
+  tags: [expressions]
+- text: このカバンが気に入った
+  words: [この, カバン, 気に入る]
+  tags: [expressions]
+- text: やっと手に入れた
+  words: [やっと, 手に入れる]
+  tags: [expressions]
+- text: 間に合わなかった
+  words: [間に合う]
+  tags: [expressions]
+- text: 電話をかけた
+  words: [電話, かける]
+  tags: [expressions]
+- text: これは本です
+  words: [これ, 本]
+  tags: [expressions]
+- text: 実は知らないんだ
+  words: [実は, 知る]
+  tags: [expressions, casual]
+- text: 行ったことがある
+  words: [行く]
+  filtered: {ことがある: grammar}
+  tags: [expressions, grammar]
+- text: 本当にありがとうございます
+  words: [本当]
+  filtered: {ありがとうございます: interjection}
+  tags: [expressions, set-phrase]
+
+# ---------------------------------------------------------------- casual speech
+- text: それ、マジじゃん
+  words: [それ, マジ]
+  filtered: {じゃん: particle}
+  tags: [casual]
+- text: 俺が行くっす
+  words: [俺, 行く]
+  tags: [casual]
+- text: 何やってんだ
+  words: [何, やる]
+  tags: [casual]
+- text: そうなんだ
+  words: [そう]
+  tags: [casual]
+- text: 知らねえよ
+  words: [知る]
+  tags: [casual]
+- text: やべえ
+  words: [やばい]
+  tags: [casual]
+
+- text: カ… カズマこそ考えろ！
+  words: [考える]
+  filtered: {カ: interjection, カズマ: name}
+  tags: [interjections, names]
+- text: どうすんの？ ねえ どうしよう
+  words: [どう, する, どう, する]
+  filtered: {ねえ: interjection}
+  tags: [interjections, casual]
+- text: んじゃ これから自由行動
+  words: [これ, 自由, 行動]
+  filtered: {んじゃ: grammar}
+  tags: [grammar, casual]
+- text: 何とか言いなさいよ
+  words: [何, 言う]
+  filtered: {なさい: grammar}
+  tags: [grammar]
+- text: 明日なら行けるよ
+  words: [明日, 行ける]
+  tags: [conjugation]
+
+- text: グリッチを見つけた。アルバイトとボールペン
+  words: [見つける, アルバイト, グリッチ, ボールペン]   # loanwords are words (known or not: tests/test_loanwords.py)
+  tags: [katakana]
+- text: ガチムチなんだぜ
+  words: [ガチムチ]   # Japanese slang written in katakana, not a loanword
+  tags: [katakana]
+
+# ---------------------------------------------------------------- loanwords & elongation
+- text: コンピューターを使う
+  words: [使う, コンピューター]
+  tags: [katakana]
+- text: ラーメンが食べたいなー
+  words: [食べる, ラーメン]
+  
+  tags: [katakana, elongation]
+- text: ねぇ、いいでしょ？
+  words: [いい]
+  filtered: {ねー: interjection}
+  tags: [elongation]
+- text: おいしーい！
+  words: [美味しい]
+  tags: [elongation]
+
+# ---------------------------------------------------------------- compounds
+- text: 顕微鏡を使う
+  words: [顕微鏡, 使う]
+  tags: [compounds]
+- text: 電子顕微鏡
+  words: [電子, 顕微鏡]
+  tags: [compounds]
+- text: 感染対策が必要だ
+  words: [感染, 対策, 必要]
+  tags: [compounds]
+- text: 経済政策について
+  words: [経済, 政策]
+  filtered: {について: grammar}
+  tags: [compounds, grammar]
+- text: 生活習慣病の寄生虫
+  words: [生活習慣病, 寄生虫]
+  tags: [compounds]
+- text: 自動車と自転車
+  words: [自動車, 自転車]
+  tags: [compounds]
+- text: 授業中に寝た
+  words: [授業, 寝る]
+  filtered: {中: affix}
+  tags: [compounds]
+- text: 日本語が上手
+  words: [日本語, 上手]
+  tags: [compounds]
+- text: 一目惚れした
+  words: [一目惚れ]
+  filtered: {し: grammar}
+  tags: [compounds]
+- text: 重要性を理解する
+  words: [重要, 理解]
+  filtered: {性: affix}
+  tags: [compounds]
+- text: お金がない
+  words: [お金, ない]
+  tags: [compounds]
+- text: 図書館で本を読む
+  words: [図書館, 本, 読む]
+  tags: [compounds]
+
+# ---------------------------------------------------------------- numbers
+- text: 三人で五分待った
+  words: [待つ]
+  filtered: {三: number, 人: number, 五: number, 分: number}
+  tags: [numbers]
+- text: で、どうするの？
+  words: [どう, する]
+  filtered: {で: grammar}
+  tags: [grammar]
+- text: ２つください
+  words: [下さる]
+  tags: [numbers]
+- text: いくら頼まれたとはいえ
+  words: [幾ら, 頼む]
+  filtered: {とはいえ: grammar}
+  tags: [expressions, grammar]
+- text: すげぇ、当たってる
+  words: [凄い, 当たる]  # slurred adjectives count as the standard word (すげー → 凄い)
+  tags: [casual, elongation]
+- text: 三番目の男
+  words: [男]
+  filtered: {番目: number}
+  tags: [numbers]
+
+# ---------------------------------------------------------------- subtitle cleanup
+- text: （カズマ）１つだけ…
+  words: []
+  cleaned: １つだけ…
+  tags: [cleanup]
+- text: （藤本(ふじもと)）　君こそ理想の人材だ
+  words: [君, 理想, 人材]
+  cleaned: 君こそ理想の人材だ
+  tags: [cleanup]
+- text: 死にたくない（笑）
+  words: [死ぬ]
+  cleaned: 死にたくない
+  tags: [cleanup]
+- text: 海賊[かいぞく]だー！
+  words: [海賊]
+  tags: [cleanup]
+# Colloquial and particle-like forms (2026-11-19)
+- text: 自信がねーけど
+  words: [自信, 無い]
+  tags: [casual]
+- text: おめえ 山に帰るつもりか
+  words: [お前, 山, 帰る, 積もり]
+  tags: [casual]
+- text: わしも見るのは初めてじゃ
+  words: [儂, 見る, 初めて]
+- text: 犯罪者をより多く報道する
+  words: [犯罪, 多い, 報道]
+  filtered: {より: grammar}
+- text: よし もう１回やるから
+  words: [もう, やる]
+  filtered: {よし: interjection}
+- text: しちゃいけないって
+  words: [する]
+  filtered: {いけ: grammar}
+- text: 私が L であることも
+  words: [私, 事]
+  filtered: {である: grammar}
+- text: まあ せっかくだし もらっておくか
+  words: [折角, 貰う]
+  filtered: {だし: grammar}
+- text: やっぱ凄いね
+  words: [矢張り, 凄い]
+- text: オメエらから
+  words: [お前]
+- text: 何もかも想像以上
+  words: [何, 想像, 以上]
+  filtered: {か: fragment}
+- text: そこかっ！
+  words: [そこ]
+  filtered: {かっ: particle}
+- text: よう なんか手伝おうか？
+  words: [何, 手伝う]
+  filtered: {よう: interjection}
+- text: 違ーう！ みんな誤解してるぞ
+  words: [違う, 皆, 誤解]
+- text: あの世界に憎しみ以外の感情を
+  words: [あの, 世界, 憎しみ, 以外, 感情]
+- text: 行けっ キリト！
+  words: [行く]
+  filtered: {キリト: name}
+- text: くそっ 逃げろっ！
+  words: [逃げる]
+  filtered: {くそっ: interjection}
+- text: よおっ キリトか
+  words: []
+  filtered: {よおっ: interjection, キリト: name}
+- text: 会話から入んだよ
+  words: [会話, 入る]
+- text: どうなされます？
+  words: [どう, 為さる]
+- text: つい売り言葉に買い言葉で…
+  words: [つい, 売り言葉に買い言葉]
+- text: あだっ 調子乗んな！
+  words: [調子, 乗る]
+- text: お待たせしましたのですう
+  words: [待つ, する]
+- text: うひひひひひ…
+  words: []
+- text: 先生になれる
+  words: [先生, 成る]
+- text: 痛い痛い
+  words: [痛い]
+- text: 危機的状況を理解していない
+  words: [危機, 状況, 理解]
+- text: 梨花 み～？
+  words: [梨花]
+  filtered: {み: interjection}
+- text: どーしよう！ 全然勉強してないよー！
+  words: [どう, する, 全然, 勉強]
+- text: みんなー いっくよー！
+  words: [皆, 行く]
+- text: はえーよ ちゃんとやってきたのかよ
+  words: [早い, ちゃんと, やる]   # はえー is JMdict's spelling of 早い: not はえよ (生える)
+- text: 彼女 ほっといていいの？
+  words: [彼女, 放っとく]   # ほっとく (放っておく), not ほる (掘る) + とく
+- text: へへへ、付き合ってよ～素敵なおねえさん
+  words: [付き合う, 素敵, 姉さん]   # よ～ is a stretched よ: not てよう, which then splits into よう
+- text: 待ってよー 置いてかないでよー
+  words: [待つ, 置く]
+- text: 心配なんか　してね～よ。
+  words: [心配, する]   # ね～ is the colloquial ない: not 姉
+- text: んっ！？　雑かよ～！
+  words: [雑]   # not 火曜
+- text: あさってから綿流しだろう
+  words: [明後日, 綿, 流し]
+- text: きちんとおわびに伺うつもりだった
+  words: [きちんと, 詫び, 伺う, 積もり]
+- text: どこが出るかは一目瞭然。
+  words: [何処, 出る, 一目瞭然]
+- text: 正々堂々と戦う
+  words: [正々堂々, 戦う]
+- text: それも また ロックじゃが
+  words: [それ, 又, ロック]
+  filtered: {じゃが: grammar}
+- text: ううっ… うぐぐ…
+  words: []
+- text: バシャン！ 水が飛んだ
+  words: [水, 飛ぶ]
+- text: コツさえ分かれば
+  words: [骨, 分かる]
+- text: 誰がタコだ
+  words: [誰, 蛸]
+- text: ウゥ 寒っ 寒っ
+  words: [寒い, 寒い]
+- text: このクズ～！
+  words: [この, 屑]
+- text: どのような最期だったのでしょうか
+  words: [どの, 最期]
+- text: ヒヒッ。
+  words: []
+- text: あ～っ！ いててて…
+  words: []
+- text: ち～っす センパイ
+  words: [先輩]
+- text: それでビビって 逃げるとでも思ったか！
+  words: [それ, ビビる, 逃げる, 思う]
+- text: 直チニ 西ヘ向カエ
+  words: [直ちに, 西, 向かう]
+- text: 朝ダ！ 起キロ！
+  words: [朝, 起きる]
+- text: お風呂も広～い！
+  words: [風呂, 広い]
+- text: 思っ… 思ってた
+  words: [思う, 思う]
+- text: ちょっと痛っ
+  words: [ちょっと, 痛い]
+- text: ヲタクの友達
+  words: [オタク, 友達]
+- text: 日本ハムと大阪ガス
+  words: [日本, 大阪, ガス, ハム]
+- text: 鬼ガ潜ンデイルトノ噂アリ
+  words: [鬼, 潜む, 噂, 有る]

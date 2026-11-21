@@ -1,0 +1,88 @@
+# Held-out set: random lines from the subs2srs decks (seed 20261119), annotated by
+# hand BEFORE running the parser on them. Do not tune the parser against this file;
+# add new cases to parser_cases.yaml instead and use this one to measure progress.
+# Names are annotated as names even where only deck context could tell (ライト is
+# the exception: a common word that no sentence-level rule can know is a name).
+# 2026-11-19: English loanwords no longer counted as words (user decision), so the four
+# loanword items (ゴースト, シリアルナンバー, ファイル, ライト) were removed from the
+# expectations. 2026-11-20: loanwords are words again (they count as known, not filtered),
+# so the four items are back as first written. Nothing else was changed after the first run.
+
+- text: これも幸運度の差というやつか
+  words: [これ, 幸運, 差, 奴]
+- text: 俺って１度 生き返ってるから 天界規定とやらで—
+  words: [俺, 生き返る, 天界, 規定]
+- text: 多分　すぐ死にますよ　俺は
+  words: [多分, すぐ, 死ぬ, 俺]
+- text: 見て　あれ！　どうしたんだい　ゴリアテかい！　雲です　ものすごく大きな
+  words: [見る, あれ, どう, する, 雲, 物凄い, 大きな]
+- text: 彼らは死の確率が低いので 増殖の必要は少なく
+  words: [彼ら, 死, 確率, 低い, 増殖, 必要, 少ない]
+- text: ゴーストにまでシリアルナンバーを　つけられる気はない
+  words: [ゴースト, シリアルナンバー, 付ける, 気, ない]
+- text: 電車に乗っても前だけ、一点を見ていてください
+  words: [電車, 乗る, 前, 一点, 見る]
+- text: ハハッ！　お前にできることは　俺にもできるんだぜ
+  words: [お前, できる, 事, 俺, できる]
+- text: その時は、私がやる
+  words: [その, 時, 私, やる]
+- text: 背負っている箱から　女の子が…
+  words: [背負う, 箱, 女の子]
+- text: 国が亡びたのに　王だけ生きてるなんて　こっけいだわ
+  words: [国, 亡びる, 王, 生きる, 滑稽]
+- text: 今 いいところなんだから このまま見守るのよ
+  words: [今, いい, 所, このまま, 見守る]
+- text: 私のことを— “鎧の中はガチムチなんだぜ”と 大ウソを流してくれたセドル
+  words: [私, 事, 鎧, 中, ガチムチ, 嘘, 流す]
+- text: この推理オタク！
+  words: [この, 推理, オタク]
+- text: 俺と禰豆子は　鬼舞辻無惨(きぶつじむざん)を倒します
+  words: [俺, 倒す]
+- text: では　こちらから　玉鋼を選んでくださいませ
+  words: [では, こちら, 玉鋼, 選ぶ]
+- text: こうなる事…？
+  words: [こう, なる, 事]
+- text: フフフ…　殺し方は決まったか？
+  words: [殺す, 決まる]
+- text: 酔っ払いか？
+  words: [酔っ払い]
+- text: 以上の事を頭によく入れた上で…
+  words: [以上, 事, 頭, よく, 入れる, 上]
+- text: やるなら夜神さん達の責任でお願いします
+  words: [やる, 責任, お願いします]
+- text: いろいろと教えてもらって　ありがとうございます
+  words: [色々, 教える]
+- text: （伊東）助けて～！
+  words: [助ける]
+- text: ルイ　女の子の服だ
+  words: [女の子, 服]
+- text: ペンバーの上司は、捜査官全員にファイルを送った後に死亡
+  words: [上司, 捜査官, 全員, ファイル, 送る, 後, 死亡]
+- text: ライトに会いたい…
+  words: [ライト, 会う]
+- text: （めぐみん） アクア もう１度 もう１度！
+  words: [もう, もう]
+- text: ご無沙汰してま〜す！
+  words: [ご無沙汰]
+- text: はい！　あんなごちそう　久しぶりでした
+  words: [あんな, ご馳走, 久しぶり]
+- text: 罪なき人の命を　お前の妹が奪う
+  words: [罪, 無い, 人, 命, お前, 妹, 奪う]
+- text: うわあ！　善逸　やめろ！　わっ…
+  words: [止める]
+- text: いや でも僕の実力、知ってて言い出したのか？
+  words: [でも, 僕, 実力, 知る, 言い出す]
+- text: 貴様カーズ どこまでも腐りきってやがる
+  words: [貴様, どこ, 腐り切る]
+- text: いや もう火山は機体の下だぜ
+  words: [もう, 火山, 機体, 下]
+- text: 私から魔力や体力を 吸うんじゃないの？
+  words: [私, 魔力, 体力, 吸う]
+- text: うわあ　炭治郎〜！　聞いてくれよ〜
+  words: [聞く]
+- text: 悪に怯える弱い者を救い…
+  words: [悪, 怯える, 弱い, 者, 救う]
+- text: 俺は満足だよ
+  words: [俺, 満足]
+- text: ディノ·カバネの仲間は
+  words: [仲間]

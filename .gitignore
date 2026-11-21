@@ -1,0 +1,16 @@
+data/
+.venv/
+__pycache__/
+*.pyc
+.pytest_cache/
+/subs2srs_decks/
+/word_lists/
+/config.toml
+/report.*
+/reports/
+/dict/
+/ignore.txt
+/known_words.txt
+/subs/
+/docs/
+/subs_test/

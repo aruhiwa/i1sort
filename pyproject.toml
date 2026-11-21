@@ -1,0 +1,23 @@
+[project]
+name = "i1sort"
+version = "0.1.0"
+description = "i+1 sorter for Japanese sentence decks in Anki (via AnkiConnect)"
+requires-python = ">=3.12"
+dependencies = [
+    "sudachipy>=0.7",
+    "sudachidict_full",
+    "pyyaml>=6",
+]
+
+[project.scripts]
+i1sort = "i1sort.cli:main"
+
+[dependency-groups]
+dev = ["pytest>=8"]
+
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
